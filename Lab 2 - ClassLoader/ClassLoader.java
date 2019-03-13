@@ -22,10 +22,12 @@ public class ClassLoader extends JFrame implements ActionListener {
     private JPanel secondPanel;
 
     private JMenu file;
-    private JMenu infoRoot;
     private JMenuBar menuBar;
     private JMenuItem rootSource;
     private JMenuItem addClass;
+
+    private JLabel src;
+    private JTextField infoRoot;
 
     private JButton removeClass;
     private JButton add;
@@ -49,7 +51,6 @@ public class ClassLoader extends JFrame implements ActionListener {
 
         //menu
         file = new JMenu("Plik");
-        infoRoot= new JMenu("Nie ma ścieżki źródłowej");
         menuBar = new JMenuBar();
         rootSource = new JMenuItem("Katalog źródłowy");
         addClass = new JMenuItem("Dodaj klasę");
@@ -59,12 +60,25 @@ public class ClassLoader extends JFrame implements ActionListener {
         add = new JButton("Dodaj");
         remove = new JButton("Usuń ostatni");
 
+        //lista
         listView = new JList<>(listModel);
         listView.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        //ustawienia okna
+        //tekst
+        infoRoot = new JTextField("---", 25);
+        src = new JLabel("Katalog źródłowy: ");
+
+        //ustawienia okien
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 275);
+        setResizable(false);
+        setContentPane(panel);
+
+        secondFrame.setContentPane(secondPanel);
         secondFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        secondFrame.setSize(275, 325);
+        secondFrame.setResizable(false);
+        secondFrame.setLocation(this.getX() + this.getWidth(), this.getY());
 
         //sluchacze
         rootSource.addActionListener(this);
@@ -75,27 +89,22 @@ public class ClassLoader extends JFrame implements ActionListener {
 
         //menu
         menuBar.add(file);
-        menuBar.add(new JSeparator());
-        menuBar.add(infoRoot);
         file.add(rootSource);
         file.add(addClass);
         setJMenuBar(menuBar);
-        infoRoot.setSelected(false);
 
         //panel
+        panel.add(src);
+        panel.add(infoRoot);
         panel.add(new JScrollPane(listView));
         panel.add(removeClass);
         panel.add(add);
         panel.add(remove);
 
-        setContentPane(panel);
-        secondFrame.setContentPane(secondPanel);
-        panel.setFocusable(true);
-        secondPanel.setFocusable(true);
-        pack();
-        secondFrame.setSize(275, 325);
-        secondFrame.setResizable(false);
-        secondFrame.setLocation(this.getX() + this.getWidth(), this.getY());
+        //tekst
+        infoRoot.setEditable(false);
+        infoRoot.setHorizontalAlignment(SwingConstants.CENTER);
+
         setVisible(true);
         secondFrame.setVisible(true);
     }
@@ -218,7 +227,7 @@ public class ClassLoader extends JFrame implements ActionListener {
                 root = "file:" + directory + "/";
                 root=root.replace("\\", "\\\\");
                 System.out.println(root);
-                infoRoot.setText("Katalog źródłowy: " + root);
+                infoRoot.setText(directory.toString());
             }
         }
     }
@@ -242,6 +251,6 @@ public class ClassLoader extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new ClassLoader("MainWindow");
+        new ClassLoader("ClassLoader");
     }
 }
