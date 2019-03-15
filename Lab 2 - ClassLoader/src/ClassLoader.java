@@ -230,6 +230,7 @@ public class ClassLoader extends JFrame implements ActionListener {
                 infoRoot.setText(directory.toString());
             }
         }
+        Runtime.getRuntime().gc();
     }
 
     public void incInstanceNum()
