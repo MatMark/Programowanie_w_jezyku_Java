@@ -1,0 +1,23 @@
+
+{
+    "UrlopDziekański": [
+        {
+            "indeks": "235605"
+        },
+        {
+            "imie": "Mateusz"
+        },
+        {
+            "nazwisko": "Markowski"
+        },
+        {
+            "semestr": "3"
+        },
+        {
+            "deficyt": "0"
+        },
+        {
+            "adres": "daleko"
+        }
+    ]
+}

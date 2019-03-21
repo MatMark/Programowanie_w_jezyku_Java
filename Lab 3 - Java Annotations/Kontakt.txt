@@ -1,0 +1,20 @@
+
+{
+    "FormularzKontaktowy": [
+        {
+            "imie": "Mateusz"
+        },
+        {
+            "nazwisko": "Markowski"
+        },
+        {
+            "adres": "daleko"
+        },
+        {
+            "email": "235605@student.pwr.edu.pl"
+        },
+        {
+            "telefon": "123123123"
+        }
+    ]
+}
