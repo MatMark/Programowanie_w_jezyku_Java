@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Lab 4 - Java Beans:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lab_4___Java_Beans_jar/New</output-path>
+    <root id="archive" name="Lab 4 - Java Beans.jar">
+      <element id="module-output" name="Lab 4 - Java Beans" />
+    </root>
+  </artifact>
+</component>
