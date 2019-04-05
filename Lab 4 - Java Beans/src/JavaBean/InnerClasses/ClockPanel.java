@@ -4,8 +4,9 @@ import JavaBean.ClockBean;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class ClockPanel extends JPanel{
+public class ClockPanel extends JPanel implements Serializable {
 
     private DefaultComboBoxModel<Integer> comboHours = new DefaultComboBoxModel<>();
     private DefaultComboBoxModel<Integer> comboMinutes = new DefaultComboBoxModel<>();
@@ -15,18 +16,19 @@ public class ClockPanel extends JPanel{
     private JComboBox<Integer> minutes = new JComboBox<>(comboMinutes);
     private JComboBox<Integer> seconds = new JComboBox<>(comboSeconds);
 
+    private JLabel title = new JLabel("Nazwa", SwingConstants.CENTER);
+
     private JLabel h = new JLabel("Godzina:", SwingConstants.CENTER);
     private JLabel min = new JLabel("Minuty:", SwingConstants.CENTER);
     private JLabel sec = new JLabel("Sekundy:", SwingConstants.CENTER);
 
     public ClockPanel(ClockBean panel) {
         super(new GridLayout(0,1,5,5));
-        setBackground(panel.getBackground().darker());
-        setFonts(panel.getFont().deriveFont(14f));
 
         for(int i = 0; i <= 23; i++) comboHours.addElement(i);
         for(int i = 0; i <= 59; i++) {comboMinutes.addElement(i);  comboSeconds.addElement(i);}
 
+        add(title);
         add(h);
         add(hours);
         add(min);
@@ -36,6 +38,7 @@ public class ClockPanel extends JPanel{
     }
 
     public void setFonts(Font font){
+        title.setFont(font);
         h.setFont(font);
         min.setFont(font);
         sec.setFont(font);
@@ -44,6 +47,9 @@ public class ClockPanel extends JPanel{
         seconds.setFont(font);
     }
 
+    public void setBackg(Color color){
+        setBackground(color.darker());
+    }
 
     public int getSelectedHour(){
         return (int) hours.getSelectedItem();
@@ -57,4 +63,7 @@ public class ClockPanel extends JPanel{
         return (int) seconds.getSelectedItem();
     }
 
+    public void setTitle(String title) {
+        this.title.setText(title);
+    }
 }

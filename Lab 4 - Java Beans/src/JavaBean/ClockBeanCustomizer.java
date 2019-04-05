@@ -1,76 +1,131 @@
 package JavaBean;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.*;
+import java.io.Serializable;
 
-public class ClockBeanCustomizer extends JPanel implements Customizer {
+public class ClockBeanCustomizer extends JPanel implements Customizer, Serializable, ActionListener {
 
     private ClockBean bean;
-   // private Color color;
-    private PropertyEditor colorEditor;
-    private PropertyEditor fontEditor;
-    //private Font font;
-    //private JComboBox<Font> fonts;
-    //private DefaultComboBoxModel<Font> comboFonts = new DefaultComboBoxModel<>();
 
+    private JLabel title = new JLabel("Nazwa:", SwingConstants.CENTER);
+    private JLabel color = new JLabel("Kolor:", SwingConstants.CENTER);
+    private JLabel font = new JLabel("Czcionka:", SwingConstants.CENTER);
 
+    private JTextField titleField = new JTextField();
+    private JTextField fontField = new JTextField();
+
+    private JButton colorChooser = new JButton("Wybierz kolor");
 
     public ClockBeanCustomizer(){
 
-        //fonts = new JComboBox<>(comboFonts);
+        setPreferredSize(new Dimension(300, 100));
+        JPanel panel = new JPanel(new GridLayout(2,3,15,15));
 
+        titleField.setHorizontalAlignment(SwingConstants.CENTER);
+        fontField.setHorizontalAlignment(SwingConstants.CENTER);
 
-        colorEditor = PropertyEditorManager.findEditor(Color.class);
-        colorEditor.addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                setColor((Color) colorEditor.getValue());
+        colorChooser.addActionListener(this);
+
+        titleField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent evt) {
+                setTitle(titleField.getText());
+            }
+
+            public void insertUpdate(DocumentEvent evt) {
+                setTitle(titleField.getText());
+            }
+
+            public void removeUpdate(DocumentEvent evt) {
+                setTitle(titleField.getText());
             }
         });
 
-        add(colorEditor.getCustomEditor());
+        fontField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent evt) {
+                setMyFonts(fontField.getText());
+            }
 
+            public void insertUpdate(DocumentEvent evt) {
+                setMyFonts(fontField.getText());
+            }
 
-        fontEditor = PropertyEditorManager.findEditor(Font.class);
-        fontEditor.addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent evt) {
-                setFont((Font) fontEditor.getValue());
+            public void removeUpdate(DocumentEvent evt) {
+                setMyFonts(fontField.getText());
             }
         });
 
-        add(fontEditor.getCustomEditor());
+        this.add(panel);
 
+        panel.add(title);
+        panel.add(color);
+        panel.add(font);
+
+        panel.add(titleField);
+        panel.add(colorChooser);
+        panel.add(fontField);
+
+        panel.setVisible(true);
+
+    }
+
+    public void setTitle(String newTitle) {
+        if(bean == null)
+            return;
+        String oldValue = bean.getTitle();
+        bean.setTitle(newTitle);
+        firePropertyChange("title", oldValue, newTitle);
+    }
+
+    public void setMyFonts(String newValue) {
+        if (bean == null)
+            return;
+        String oldValue = bean.getMyFonts();
+        bean.setMyFonts(newValue);
     }
 
     @Override
-    public void setFont(Font newValue) {
-        if (bean == null)
-            return;
-        Font oldValue = bean.getFont();
-        bean.setFont(newValue);
-        firePropertyChange("font", oldValue, newValue);
-    }
-
-    public void setColor(Color newValue) {
-        if (bean == null)
-            return;
-        Color oldValue = bean.getColor();
-        bean.setColor(newValue);
-        firePropertyChange("color", oldValue, newValue);
-    }
-
-//    public void addPropertyChangeListener(PropertyChangeListener l) {
-//        addPropertyChangeListener(l);
-//    }
-//
-//    public void removePropertyChangeListener(PropertyChangeListener l) {
-//        removePropertyChangeListener(l);
-//    }
-
-        @Override
     public void setObject(Object obj) {
         bean = (ClockBean) obj;
-        //color = bean.getColor();
-        //font = bean.getFont();
+
+        titleField.setText(this.bean.getTitle());
+        fontField.setText(this.bean.getMyFonts());
+
+        this.bean.addVetoableChangeListener(evt -> {
+            String color = evt.getNewValue().toString();
+            if(Color.decode(color).equals(Color.BLACK) || Color.decode(color).equals(Color.WHITE))
+                throw new PropertyVetoException("Color tła nie może być czarny ani biały", evt);
+        });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source.equals(colorChooser)) {
+            if (bean == null)
+                return;
+
+            Color c = JColorChooser.showDialog(null, "Wybierz kolor", bean.getBackground());
+            if (c != null) {
+                String oldValue = bean.getMyBackground();
+                String newValue = Integer.toString(c.getRGB());
+                try {
+                    fireVetoableChange("myBackground", oldValue, newValue);
+                } catch (PropertyVetoException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    bean.setMyBackground(newValue);
+                } catch (PropertyVetoException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
 }

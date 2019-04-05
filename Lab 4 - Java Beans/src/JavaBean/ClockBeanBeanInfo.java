@@ -1,47 +1,38 @@
 package JavaBean;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.beans.SimpleBeanInfo;
-import java.io.IOException;
 
 public class ClockBeanBeanInfo extends SimpleBeanInfo {
 
-    public Image getIcon(int iconType) {
-        String name = "";
-        if (iconType == BeanInfo.ICON_COLOR_16x16)
-            name = "COLOR_16x16";
-        else if (iconType == BeanInfo.ICON_COLOR_32x32)
-            name = "COLOR_32x32";
-        else if (iconType == BeanInfo.ICON_MONO_16x16)
-            name = "MONO_16x16";
-        else if (iconType == BeanInfo.ICON_MONO_32x32)
-            name = "MONO_32x32";
-        else
-            return null;
-        Image im = null;
-        try {
-            im = ImageIO.read(ClockBeanBeanInfo.class.getClassLoader().getResourceAsStream("ChartBean_" + name + ".gif"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return im;
-    }
+    private static Image icon = null;
+    private static String iconName = "clock.png";
 
     public PropertyDescriptor[] getPropertyDescriptors() {
         try {
 
-            return new PropertyDescriptor[]{
-                    new PropertyDescriptor("font", ClockBean.class),
-                    new PropertyDescriptor("color", ClockBean.class),
+            return new PropertyDescriptor[] {
+                    new PropertyDescriptor("title", JavaBean.ClockBean.class, "getTitle", "setTitle"),
+                    new PropertyDescriptor("myBackground", JavaBean.ClockBean.class, "getMyBackground", "setMyBackground"),
+                    new PropertyDescriptor("myFonts", JavaBean.ClockBean.class, "getMyFonts", "setMyFonts")
             };
         } catch (IntrospectionException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public Image getIcon(int iconKind) {
+        if (iconName == null) {
+            return null;
+        } else {
+            if (icon == null) {
+                icon = loadImage(iconName);
+            }
+            return icon;
         }
     }
 }

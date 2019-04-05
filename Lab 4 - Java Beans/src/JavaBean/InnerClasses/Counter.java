@@ -28,8 +28,6 @@ public class Counter extends JPanel implements Runnable, ActionListener {
         super(new GridLayout(1,2,5,5));
         this.endTime = time;
         this.panel = panel;
-        text.setFont(panel.getFont());
-        cancel.setFont(panel.getFont());
         add(text);
         add(cancel);
         cancel.addActionListener(this);
@@ -61,6 +59,12 @@ public class Counter extends JPanel implements Runnable, ActionListener {
 
     public Date getEndTime() {
         return endTime;
+    }
+
+    public void setFonts(Font font)
+    {
+        text.setFont(font);
+        cancel.setFont(font);
     }
 
     @Override

@@ -14,7 +14,6 @@ public class MyTimer extends JLabel implements Runnable {
 
     public MyTimer(ClockBean panel) {
         super(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss")), SwingConstants.CENTER);
-        setFont(panel.getFont().deriveFont(24f));
         Thread thread = new Thread(this);
         thread.start();
     }
