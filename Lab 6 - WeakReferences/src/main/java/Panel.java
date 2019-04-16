@@ -139,7 +139,7 @@ public class Panel extends JFrame implements ActionListener {
 
         Panel panel = new Panel();
         panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel.setSize(675, 450);
+        panel.setSize(675, 500);
         panel.setResizable(false);
         panel.setVisible(true);
     }
