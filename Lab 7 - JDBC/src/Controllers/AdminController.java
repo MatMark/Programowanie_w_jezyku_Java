@@ -10,7 +10,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
