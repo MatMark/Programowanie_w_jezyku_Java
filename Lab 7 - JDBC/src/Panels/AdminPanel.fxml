@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminController">
+  <tabs>
+    <Tab text="Cennik">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="404.0" layoutY="29.0" text="Dostępne usługi" />
+                  <TableView fx:id="servicesTable" layoutX="307.0" layoutY="58.0" prefHeight="200.0" prefWidth="280.0">
+                    <columns>
+                      <TableColumn fx:id="nameColumn" prefWidth="206.0" text="Nazwa" />
+                      <TableColumn fx:id="priceColumn" prefWidth="73.0" text="Cena" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="60.0" layoutY="132.0" text="Nowa usługa" />
+                  <TextField fx:id="serviceNameTextField" layoutX="23.0" layoutY="170.0" promptText="Nazwa usługi" />
+                  <TextField fx:id="servicePriceTextField" layoutX="23.0" layoutY="222.0" promptText="Cena usługi" />
+                  <Button fx:id="addServiceButton" layoutX="54.0" layoutY="274.0" mnemonicParsing="false" onAction="#addService" text="Dodaj usługę" />
+                  <Button fx:id="removeServiceButton" layoutX="505.0" layoutY="274.0" mnemonicParsing="false" onAction="#removeService" text="Usuń usługę" />
+                  <Button fx:id="editSeviceButton" layoutX="307.0" layoutY="274.0" mnemonicParsing="false" onAction="#editService" text="Edytuj usługę" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Terminarz">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <DatePicker fx:id="newTermCalendar" layoutX="30.0" layoutY="135.0" prefHeight="25.0" prefWidth="145.0" promptText="Dostępny termin" />
+                  <Label layoutX="41.0" layoutY="106.0" text="Dodaj dostępny termin" />
+                  <Button fx:id="removeTermButton" layoutX="386.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeTerm" text="Usuń termin" />
+                  <Button fx:id="newTermButton" layoutX="58.0" layoutY="201.0" mnemonicParsing="false" onAction="#newTerm" text="Dodaj termin" />
+                  <TableView fx:id="termsTable" layoutX="192.0" layoutY="56.0" prefHeight="235.0" prefWidth="387.0">
+                    <columns>
+                      <TableColumn fx:id="dateColumn" prefWidth="71.0" text="Data" />
+                        <TableColumn fx:id="timeColumn" prefWidth="61.0" text="Godzina" />
+                        <TableColumn fx:id="serviceColumn" prefWidth="132.0" text="Usługa" />
+                      <TableColumn fx:id="customerColumn" prefWidth="122.0" text="Klient" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="timeTextField" layoutX="30.0" layoutY="167.0" prefHeight="25.0" prefWidth="145.0" promptText="Godzina (HH:MM:SS)" />
+                  <Button fx:id="editTermButton" layoutX="492.0" layoutY="303.0" mnemonicParsing="false" onAction="#editTerm" text="Edytuj termin" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Raporty">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <DatePicker fx:id="startDateCalendar" layoutX="30.0" layoutY="88.0" promptText="Data początkowa" />
+                  <DatePicker fx:id="endDateCalendar" layoutX="247.0" layoutY="88.0" promptText="Data końcowa" />
+                  <Button fx:id="raportButton" layoutX="475.0" layoutY="88.0" mnemonicParsing="false" onAction="#newRaport" text="Generuj raport" />
+                  <TextArea fx:id="raportTextArea" editable="false" layoutX="30.0" layoutY="166.0" prefHeight="155.0" prefWidth="539.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

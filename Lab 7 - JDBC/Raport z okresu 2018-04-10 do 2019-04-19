@@ -1,0 +1,21 @@
+[
+
+Id zlecenia: 4
+Data: 2018-05-01
+Godzina: 22:22:22
+Klient: name surname
+Usługa: Wymiana koła, 
+
+Id zlecenia: 8
+Data: 2019-04-12
+Godzina: 21:21:21
+Klient: Janusz Sumaryczny
+Usługa: Pompowanie opon, 
+
+Id zlecenia: 10
+Data: 2018-07-12
+Godzina: 14:56:54
+Klient: Janusz Sumaryczny
+Usługa: Prostowanie felg]
+
+Dochód z wybranego okresu: 220
