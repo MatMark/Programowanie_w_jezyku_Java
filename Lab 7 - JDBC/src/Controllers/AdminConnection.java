@@ -2,12 +2,36 @@ package Controllers;
 
 import Tables.Service;
 import Tables.Term;
+import javafx.util.StringConverter;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminConnection {
+
+    static final StringConverter<LocalDate> mySQLDate = new StringConverter<LocalDate>() {
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        @Override public String toString(LocalDate date) {
+            if (date != null) {
+                return dateFormatter.format(date);
+            } else {
+                return "";
+            }
+        }
+
+        @Override public LocalDate fromString(String string) {
+            if (string != null && !string.isEmpty()) {
+                return LocalDate.parse(string, dateFormatter);
+            } else {
+                return null;
+            }
+        }
+    };
 
     private final String DB_URL = "jdbc:mysql://localhost/JDBC";
 
@@ -160,6 +184,110 @@ public class AdminConnection {
 
         return suma;
     }
+
+    public void addServices(Service newService) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "INSERT INTO services (price, name) VALUES ("+
+                newService.getPrice() +
+                ", '"+
+                newService.getName() +
+                "')";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+    public void removeServices(String removedService) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "DELETE FROM services WHERE name = '"+
+                removedService +
+                "';";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+    public  void editServices(String newPrice, String newName, String oldName) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "UPDATE services SET price = " +
+                newPrice +
+                ", name = '" +
+                newName +
+                "' WHERE name = '" +
+                oldName +
+                "';";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+    public void addTerms(Term newTerm) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "INSERT INTO terms (date, time) VALUES ('"+
+                newTerm.getDate() +
+                "', '"+
+                newTerm.getTime() +
+                "')";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+    public void removeTerms(int idTerm) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "DELETE FROM terms WHERE idTerms = "+
+                idTerm +
+                ";";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+    public  void editTerms(String date, String time, String clientName, String clientSurname, String serviceName, int termId) throws SQLException {
+
+        //------------QUERY----------------
+        stmt = conn.createStatement();
+
+        String sql = "UPDATE `terms`\n" +
+                "SET\n" +
+                "date = '" + date + "',\n" +
+                "time = '" + time + "',\n" +
+                "idClients = (SELECT idClients FROM clients WHERE (clients.name = '"+clientName+"' AND clients.surname = '"+clientSurname+"')),\n" +
+                "idServices = (SELECT idServices FROM services WHERE services.name = '"+serviceName+"')\n" +
+                "WHERE idTerms = "+termId+";";
+
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
+
+        stmt.close();
+    }
+
+
 
 
 }

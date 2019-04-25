@@ -17,7 +17,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -52,9 +51,9 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void addService() throws SQLException, ClassNotFoundException {
+    void addService() throws SQLException {
         if(!serviceNameTextField.getText().isEmpty() && !servicePriceTextField.getText().isEmpty()) {
-            ConectionDB.addServices(new Service(Integer.parseInt(servicePriceTextField.getText()), serviceNameTextField.getText()));
+            dbConnection.addServices(new Service(Integer.parseInt(servicePriceTextField.getText()), serviceNameTextField.getText()));
             refreshServicesTable();
             servicePriceTextField.setText("");
             serviceNameTextField.setText("");
@@ -62,14 +61,14 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    void removeService() throws SQLException, ClassNotFoundException {
+    void removeService() throws SQLException {
         Service service = servicesTable.getSelectionModel().getSelectedItem();
-        ConectionDB.removeServices(service.getName());
+        dbConnection.removeServices(service.getName());
         refreshServicesTable();
     }
 
     @FXML
-    void editService() throws SQLException, ClassNotFoundException {
+    void editService() throws SQLException {
         if(servicesTable.getSelectionModel().getSelectedItem() != null) {
             Service service = servicesTable.getSelectionModel().getSelectedItem();
 
@@ -105,8 +104,8 @@ public class AdminController implements Initializable {
 
             result.ifPresent(priceName -> {
                 try {
-                    ConectionDB.editServices( price.getText(), name.getText(), service.getName());
-                } catch (ClassNotFoundException | SQLException e) {
+                    dbConnection.editServices( price.getText(), name.getText(), service.getName());
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             });
@@ -140,28 +139,80 @@ public class AdminController implements Initializable {
     TextField timeTextField;
 
     private void refreshTermsTable() throws SQLException {
-        termsData = FXCollections.observableArrayList(dbConnection.selectReservedTerms());
+        List<Term> visibleTerms = dbConnection.selectReservedTerms();
+        visibleTerms.addAll(dbConnection.selectFreeTerms());
+        termsData = FXCollections.observableArrayList(visibleTerms);
         termsTable.setItems(termsData);
     }
 
     @FXML
-    void removeTerm() throws SQLException, ClassNotFoundException {
+    void removeTerm() throws SQLException {
         Term term = termsTable.getSelectionModel().getSelectedItem();
-        ConectionDB.removeTerms(term.getId());
+        dbConnection.removeTerms(term.getId());
         refreshTermsTable();
     }
 
     @FXML
-    void editTerm() throws SQLException, ClassNotFoundException {
-        System.out.println("edit");
+    void editTerm() throws SQLException {
+        if(termsTable.getSelectionModel().getSelectedItem() != null) {
+            Term term = termsTable.getSelectionModel().getSelectedItem();
+
+            Dialog dialog = new Dialog();
+            dialog.setTitle("Edit term");
+
+            ButtonType loginButtonType = new ButtonType("Zatwierdź", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            TextField date = new TextField(term.getDate());
+            date.setPromptText("Data");
+            TextField time = new TextField(term.getTime());
+            time.setPromptText("Czas");
+            TextField clientName = new TextField();
+            clientName.setPromptText("Imię klienta");
+            TextField clientSurname = new TextField();
+            clientSurname.setPromptText("Nazwisko klienta");
+            TextField serviceName = new TextField(term.getServiceName());
+            serviceName.setPromptText("Nazwa usługi");
+
+            grid.add(date, 1, 0);
+            grid.add(time, 1, 1);
+            grid.add(clientName, 1, 2);
+            grid.add(clientSurname, 1, 3);
+            grid.add(serviceName, 1, 4);
+
+            dialog.getDialogPane().setContent(grid);
+
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == loginButtonType) {
+                    return 0;
+                }
+                return null;
+            });
+
+            Optional result = dialog.showAndWait();
+
+            result.ifPresent(priceName -> {
+                try {
+                    dbConnection.editTerms( date.getText(), time.getText(), clientName.getText(), clientSurname.getText(), serviceName.getText(), term.getId());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+            refreshServicesTable();
+        }
         refreshTermsTable();
     }
 
     @FXML
-    void newTerm() throws SQLException, ClassNotFoundException {
+    void newTerm() throws SQLException {
         if(!timeTextField.getText().isEmpty() && newTermCalendar.getValue() != null) {
             System.out.println(newTermCalendar.getValue().toString());
-            ConectionDB.addTerms(new Term(newTermCalendar.getValue().toString(), timeTextField.getText()));
+            dbConnection.addTerms(new Term(newTermCalendar.getValue().toString(), timeTextField.getText()));
             refreshServicesTable();
             timeTextField.setText("");
             newTermCalendar.setValue(null);
@@ -237,10 +288,10 @@ public class AdminController implements Initializable {
         }
         termsTable.setItems(termsData);
 
-        newTermCalendar.setConverter(ConectionDB.mySQLDate);
+        newTermCalendar.setConverter(AdminConnection.mySQLDate);
 
         //-------Raporty-----------
-        startDateCalendar.setConverter(ConectionDB.mySQLDate);
-        endDateCalendar.setConverter(ConectionDB.mySQLDate);
+        startDateCalendar.setConverter(AdminConnection.mySQLDate);
+        endDateCalendar.setConverter(AdminConnection.mySQLDate);
     }
 }
