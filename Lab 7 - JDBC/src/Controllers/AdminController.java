@@ -72,7 +72,7 @@ public class AdminController implements Initializable {
         if(servicesTable.getSelectionModel().getSelectedItem() != null) {
             Service service = servicesTable.getSelectionModel().getSelectedItem();
 
-            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            Dialog dialog = new Dialog();
             dialog.setTitle("Edit service");
 
             ButtonType loginButtonType = new ButtonType("Zatwierdź", ButtonBar.ButtonData.OK_DONE);
@@ -95,12 +95,12 @@ public class AdminController implements Initializable {
 
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == loginButtonType) {
-                    return new Pair<>(name.getText(), price.getText());
+                    return 0;
                 }
                 return null;
             });
 
-            Optional<Pair<String, String>> result = dialog.showAndWait();
+            Optional result = dialog.showAndWait();
 
             result.ifPresent(priceName -> {
                 try {

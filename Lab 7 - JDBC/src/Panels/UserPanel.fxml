@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserController">
+   <children>
+      <TableView fx:id="servicesTable" layoutX="50.0" layoutY="56.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="serviceNameColumn" prefWidth="134.0" text="Nazwa" />
+          <TableColumn fx:id="servicePriceColumn" prefWidth="65.0" text="Cena" />
+        </columns>
+      </TableView>
+      <TableView fx:id="termsTable" layoutX="273.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="dateColumn" prefWidth="96.0" text="Data" />
+          <TableColumn fx:id="TimeColumn" prefWidth="103.0" text="Godzina" />
+        </columns>
+      </TableView>
+      <Button fx:id="bookTermButton" layoutX="494.0" layoutY="145.0" mnemonicParsing="false" onAction="#bookTerm" text="Zarezerwuj" />
+      <Label layoutX="107.0" layoutY="29.0" text="Dostępne usługi" />
+      <Label layoutX="334.0" layoutY="29.0" text="Wolne terminy" />
+   </children>
+</AnchorPane>
