@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,6 +21,15 @@ public class UserController implements Initializable {
     private UserConnection dbConnection;
     private ObservableList<Term> termsData;
     private ObservableList<Service> servicesData;
+
+    @FXML
+    Label availableServicesLabel;
+
+    @FXML
+    Label freeTermsLabel;
+
+    @FXML
+    Button bookTermButton;
 
     @FXML
     TableView<Service> servicesTable;
@@ -58,6 +69,8 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        setLanguage();
 
         boolean userExist = false;
 
@@ -101,5 +114,15 @@ public class UserController implements Initializable {
             e.printStackTrace();
         }
         termsTable.setItems(termsData);
+    }
+
+    private void setLanguage(){
+        availableServicesLabel.setText(UserConnection.messages.getString("availableServices"));
+        freeTermsLabel.setText(UserConnection.messages.getString("freeTerms"));
+        serviceNameColumn.setText(UserConnection.messages.getString("serviceName"));
+        servicePriceColumn.setText(UserConnection.messages.getString("servicePrice"));
+        dateColumn.setText(UserConnection.messages.getString("date"));
+        timeColumn.setText(UserConnection.messages.getString("time"));
+        bookTermButton.setText(UserConnection.messages.getString("book"));
     }
 }

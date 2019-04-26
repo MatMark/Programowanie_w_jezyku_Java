@@ -24,10 +24,10 @@
                       <TableColumn fx:id="priceColumn" prefWidth="73.0" text="Cena" />
                     </columns>
                   </TableView>
-                  <Label layoutX="60.0" layoutY="132.0" text="Nowa usługa" />
-                  <TextField fx:id="serviceNameTextField" layoutX="23.0" layoutY="170.0" promptText="Nazwa usługi" />
-                  <TextField fx:id="servicePriceTextField" layoutX="23.0" layoutY="222.0" promptText="Cena usługi" />
-                  <Button fx:id="addServiceButton" layoutX="54.0" layoutY="274.0" mnemonicParsing="false" onAction="#addService" text="Dodaj usługę" />
+                  <Label layoutX="115.0" layoutY="82.0" text="Nowa usługa" />
+                  <TextField fx:id="serviceNameTextField" layoutX="78.0" layoutY="120.0" promptText="Nazwa usługi" />
+                  <TextField fx:id="servicePriceTextField" layoutX="78.0" layoutY="172.0" promptText="Cena usługi" />
+                  <Button fx:id="addServiceButton" layoutX="109.0" layoutY="224.0" mnemonicParsing="false" onAction="#addService" text="Dodaj usługę" />
                   <Button fx:id="removeServiceButton" layoutX="505.0" layoutY="274.0" mnemonicParsing="false" onAction="#removeService" text="Usuń usługę" />
                   <Button fx:id="editSeviceButton" layoutX="307.0" layoutY="274.0" mnemonicParsing="false" onAction="#editService" text="Edytuj usługę" />
                </children></AnchorPane>

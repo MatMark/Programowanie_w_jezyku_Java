@@ -22,7 +22,7 @@
         </columns>
       </TableView>
       <Button fx:id="bookTermButton" layoutX="494.0" layoutY="145.0" mnemonicParsing="false" onAction="#bookTerm" text="Zarezerwuj" />
-      <Label layoutX="107.0" layoutY="29.0" text="Dostępne usługi" />
-      <Label layoutX="334.0" layoutY="29.0" text="Wolne terminy" />
+      <Label fx:id="availableServicesLabel" layoutX="107.0" layoutY="29.0" text="Dostępne usługi" />
+      <Label fx:id="freeTermsLabel" layoutX="334.0" layoutY="29.0" text="Wolne terminy" />
    </children>
 </AnchorPane>

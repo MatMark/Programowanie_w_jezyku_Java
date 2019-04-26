@@ -6,8 +6,15 @@ import Tables.Term;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class UserConnection {
+
+    static final Locale plLocale = new Locale("pl", "PL");
+    static final Locale usLocale = new Locale("en", "US");
+
+    static ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", plLocale);
 
     static String activeUserName = "";
     static String activeUserSurname = "";
