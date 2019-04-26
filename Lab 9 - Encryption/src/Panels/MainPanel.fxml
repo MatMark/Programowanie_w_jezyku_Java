@@ -7,27 +7,28 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.201" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <children>
-      <TextField fx:id="publicKeyTextField" layoutX="50.0" layoutY="78.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj klucz publiczny" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="51.0" text="Klucz publiczny" textAlignment="CENTER" />
+      <TextField fx:id="publicKeyTextField" layoutX="50.0" layoutY="145.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj klucz publiczny" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="120.0" prefHeight="17.0" prefWidth="90.0" text="Klucz publiczny" textAlignment="CENTER" />
       <ToolBar prefHeight="40.0" prefWidth="600.0">
         <items>
           <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#encryptFile" text="Szyfruj" />
             <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#decryptFile" text="Rozszyfruj" />
             <Separator orientation="VERTICAL" prefHeight="20.0" />
-            <Button fx:id="publicKeyButton" mnemonicParsing="false" onAction="#changePublicKey" text="Klucz publiczny" />
             <Button fx:id="privateKeyButton" mnemonicParsing="false" onAction="#changePrivateKey" text="Klucz prywatny" />
+            <Button fx:id="publicKeyButton" mnemonicParsing="false" onAction="#changePublicKey" text="Klucz publiczny" />
             <Button fx:id="sourceFileButton" mnemonicParsing="false" onAction="#changeSourceFile" text="Plik źródłowy" />
             <Button fx:id="destinationFileButton" mnemonicParsing="false" onAction="#changeDestinationFile" text="Plik wynikowy" />
+            <Separator orientation="VERTICAL" prefHeight="20.0" />
+            <Button fx:id="newKeyButton" mnemonicParsing="false" onAction="#newKeys" text="Nowe klucze RSA" />
         </items>
       </ToolBar>
-      <TextField fx:id="privateKeyTextField" layoutX="50.0" layoutY="141.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj klucz prywatny" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="259.0" layoutY="114.0" text="Klucz prywatny" textAlignment="CENTER" />
-      <TextField fx:id="sourceFileTextField" layoutX="50.0" layoutY="206.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj plik źródłowy" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="178.0" text="Plik źródłowy" textAlignment="CENTER" />
-      <TextField fx:id="destinationFileTextField" layoutX="49.0" layoutY="274.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj plik wynikowy" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="247.0" text="Plik wynikowy" textAlignment="CENTER" />
+      <TextField fx:id="privateKeyTextField" layoutX="50.0" layoutY="80.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj klucz prywatny" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="55.0" prefHeight="17.0" prefWidth="90.0" text="Klucz prywatny" textAlignment="CENTER" />
+      <TextField fx:id="sourceFileTextField" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj plik źródłowy" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="185.0" prefHeight="17.0" prefWidth="90.0" text="Plik źródłowy" textAlignment="CENTER" />
+      <TextField fx:id="destinationFileTextField" layoutX="50.0" layoutY="275.0" prefHeight="25.0" prefWidth="500.0" promptText="Dodaj plik wynikowy" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="260.0" layoutY="250.0" prefHeight="17.0" prefWidth="90.0" text="Plik wynikowy" textAlignment="CENTER" />
    </children>
 </AnchorPane>

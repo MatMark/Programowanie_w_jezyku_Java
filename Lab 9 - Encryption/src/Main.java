@@ -4,11 +4,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Panels/MainPanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Panels/MainPanel.fxml"));
         primaryStage.setTitle("Lab 9 - Encryption");
         primaryStage.setScene(new Scene(root, 600, 330));
         primaryStage.show();
