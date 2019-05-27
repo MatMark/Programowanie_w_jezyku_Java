@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp spec="1.0+" codebase="http://localhost:8080/downloads/" href="Encryption.jnlp">
+	<information>
+		<title>SEncryption</title>
+		<vendor>235605</vendor>
+		<homepage href="http://localhost:8080/downloads/" />
+		<description>Java Web Start lab 10</description>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.6+" />
+		<jar href="2SEncryption.jar" />
+	</resources>
+	<application-desc main-class="Main" />
+</jnlp>

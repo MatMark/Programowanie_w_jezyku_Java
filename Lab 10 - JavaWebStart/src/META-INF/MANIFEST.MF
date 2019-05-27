@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Application-Name: SEncryption
+Permissions: all-permissions
+Caller-Allowable-Codebase: http://localhost:8080/downloads/
+Codebase: *
+Application-Library-Allowable-Codebase: http://localhost:8080/download
+ s/SEncryption.jar
+Main-Class: Main
+
