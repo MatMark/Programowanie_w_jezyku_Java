@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Lab12.AppController">
+  <tabs>
+    <Tab onSelectionChanged="#reload" text="Przeglądarka">
+         <content>
+            <WebView fx:id="htmlView" prefHeight="375.0" prefWidth="575.0" />
+         </content>
+    </Tab>
+      <Tab text="Tworzenie">
+         <content>
+            <TilePane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="600.0" TilePane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="productName" layoutX="14.0" layoutY="118.0" promptText="Nazwa" />
+                        <TextField fx:id="productPrice" layoutX="14.0" layoutY="172.0" promptText="Cena" />
+                        <TextField fx:id="productType" layoutX="14.0" layoutY="224.0" promptText="Typ" />
+                        <TextField fx:id="sellerTel" layoutX="216.0" layoutY="224.0" promptText="Nr. tel." />
+                        <TextField fx:id="sellerFirstName" layoutX="216.0" layoutY="118.0" promptText="Imie" />
+                        <TextField fx:id="sellerLastName" layoutX="216.0" layoutY="172.0" promptText="Nazwisko" />
+                        <TextField fx:id="street" layoutX="437.0" layoutY="118.0" promptText="Ulica" />
+                        <TextField fx:id="city" layoutX="437.0" layoutY="172.0" promptText="Miasto" />
+                        <TextField fx:id="postCode" layoutX="437.0" layoutY="224.0" promptText="Kod pocztowy" />
+                        <Label layoutX="64.0" layoutY="83.0" text="Produkt">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="249.0" layoutY="83.0" text="Wystawiający">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="494.0" layoutY="83.0" text="Adres">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addButton" defaultButton="true" layoutX="538.0" layoutY="332.0" mnemonicParsing="false" onAction="#addOffer" text="Dodaj" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </TilePane>
+         </content>
+      </Tab>
+    <Tab text="Style">
+         <content>
+            <TilePane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane prefHeight="370.0" prefWidth="600.0">
+                     <children>
+                        <Button fx:id="htmlButton" layoutX="245.0" layoutY="173.0" mnemonicParsing="false" onAction="#makehtml" text="Wybierz styl okna" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </TilePane>
+         </content>
+    </Tab>
+  </tabs>
+</TabPane>
