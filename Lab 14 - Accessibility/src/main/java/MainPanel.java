@@ -46,37 +46,13 @@ public class MainPanel extends JFrame implements ActionListener {
     }
 
     private void init(){
-        inputPanel.add(a);
-        inputPanel.add(x3In);
-        inputPanel.add(b);
-        inputPanel.add(x2In);
-        inputPanel.add(c);
-        inputPanel.add(x1In);
-        inputPanel.add(d);
-        inputPanel.add(zeroIn);
-
-        inPanel.add(precisionL);
-        inPanel.add(precision);
-
-        out1Panel.add(x1Out);
-        out1Panel.add(res1);
-
-        out2Panel.add(x2Out);
-        out2Panel.add(res2);
-
-        out3Panel.add(x3Out);
-        out3Panel.add(res3);
-
-        centerPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
-        centerPanel.add(out1Panel);
-        centerPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
-        centerPanel.add(out2Panel);
-        centerPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
-        centerPanel.add(out3Panel);
-
-        upperPanel.add(inputPanel);
-        upperPanel.add(inPanel);
-        upperPanel.add(calculate);
+        addToPanel(inputPanel, a, x3In, b, x2In, c, x1In, d, zeroIn);
+        addToPanel(inPanel, precisionL, precision);
+        addToPanel(out1Panel, x1Out, res1);
+        addToPanel(out2Panel, x2Out, res2);
+        addToPanel(out3Panel, x3Out, res3);
+        addToPanel(centerPanel, new JSeparator(SwingConstants.HORIZONTAL), out1Panel, new JSeparator(SwingConstants.HORIZONTAL), out2Panel, new JSeparator(SwingConstants.HORIZONTAL), out3Panel);
+        addToPanel(upperPanel, inputPanel, inPanel, calculate);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(upperPanel, BorderLayout.PAGE_START);
         add(mainPanel);
@@ -88,6 +64,12 @@ public class MainPanel extends JFrame implements ActionListener {
         res3.setEditable(false);
 
         accessibility();
+    }
+
+    void addToPanel(JPanel panel, JComponent... components){
+            for (JComponent component : components) {
+                panel.add(component);
+            }
     }
 
     void accessibility(){
@@ -124,7 +106,7 @@ public class MainPanel extends JFrame implements ActionListener {
         res3.getAccessibleContext().setAccessibleName("Third result");
 
         calculate.setToolTipText("Calculate button");
-        calculate.getAccessibleContext().setAccessibleDescription("Trzecie rozwiązanie");
+        calculate.getAccessibleContext().setAccessibleDescription("Oblicz miejsca zerowe");
         calculate.getAccessibleContext().setAccessibleName("Calculate button");
     }
 
